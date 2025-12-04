@@ -1,10 +1,18 @@
 package com.example.dataservice.models;
 
-import javax.xml.crypto.Data;
+import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-public class DataModel {
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class DataModel{
+    private String type;
+    private String version;
+    private PayloadModel payload;
 
-    public DataModel(){
-
+    public DataModel(Object message){
     }
 }
