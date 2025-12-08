@@ -4,11 +4,11 @@ services:
     image: rabbitmq:3.11-management
     container_name: rabbitmq
     ports:
-      - "8010:5672"      # AMQP port
-      - "8011:15672"    # management UI
+      - "REPLACE:REPLACE"      # AMQP port
+      - "REPLACE:REPLACE"    # management UI
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: REPLACE
+      RABBITMQ_DEFAULT_PASS: REPLACE
 
     networks:
       - rabbitmq
@@ -22,16 +22,16 @@ services:
     build: .
     container_name: spring-websocket-app
     ports:
-      - "8080:8080"
+      - "REPLACE:REPLACE"
     environment:
       # Spring Boot common RabbitMQ properties:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SPRING_RABBITMQ_PORT: 5672
-      SPRING_RABBITMQ_USERNAME: guest
-      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_RABBITMQ_HOST: REPLACE
+      SPRING_RABBITMQ_PORT: REPLACE
+      SPRING_RABBITMQ_USERNAME: REPLACE
+      SPRING_RABBITMQ_PASSWORD: REPLACE
 
       # optional: server.port override
-      SERVER_PORT: 8080
+      SERVER_PORT: REPLACE
 
       # optional JVM tuning
       JAVA_OPTS: "-Xms256m -Xmx512m"
