@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: rabbitmq
+    #ports:
+    #  - "REPLACE:REPLACE"      # AMQP port
+    #  - "REPLACE:REPLACE"    # management UI
+    #environment:
+    #  RABBITMQ_DEFAULT_USER: REPLACE
+    #  RABBITMQ_DEFAULT_PASS: REPLACE
+
+    networks:
+      - rabbitmq
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  dataservice:
+    build: .
+    container_name: spring-websocket-app
+    #ports:
+    #  - "REPLACE:REPLACE"
+    environment:
+      # Spring Boot common RabbitMQ properties:
+    #  SPRING_RABBITMQ_HOST: REPLACE
+    #  SPRING_RABBITMQ_PORT: REPLACE
+    #  SPRING_RABBITMQ_USERNAME: REPLACE
+    #  SPRING_RABBITMQ_PASSWORD: REPLACE
+
+      # optional: server.port override
+    #  SERVER_PORT: REPLACE
+
+      # optional JVM tuning
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - rabbitmq
+
+networks:
+  rabbitmq:
+    driver: bridge
