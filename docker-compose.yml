@@ -4,8 +4,8 @@ services:
     image: rabbitmq:3.11-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"      # AMQP port
-      - "15672:15672"    # management UI
+      - "8010:5672"      # AMQP port
+      - "8011:15672"    # management UI
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
