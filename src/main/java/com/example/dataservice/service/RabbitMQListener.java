@@ -10,9 +10,16 @@ import org.springframework.stereotype.Service;
 @ConditionalOnExpression("!'${spring.rabbitmq.host}'.isEmpty()")
 public class RabbitMQListener {
 
+    private final DataHandler dataHandler;
+
+    public RabbitMQListener(DataHandler dataHandler) {
+        this.dataHandler = dataHandler;
+    }
+
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
     public void MatlabListener(Object message, @Header("amqp_receivedRoutingKey") String routingkey){
         //handle request
         System.out.println(message.toString());
+        dataHandler.SendData(message);
     }
 }

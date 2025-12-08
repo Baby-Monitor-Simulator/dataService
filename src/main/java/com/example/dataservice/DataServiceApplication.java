@@ -1,7 +1,5 @@
 package com.example.dataservice;
 
-import com.example.dataservice.service.RabbitTest;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
