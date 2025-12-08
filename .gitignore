@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+docker-compose.override.yml
 
 ### IntelliJ IDEA ###
 .idea
@@ -31,5 +32,3 @@ build/
 
 ### VS Code ###
 .vscode/
-docker-compose.yml
-*.yml
