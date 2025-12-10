@@ -1,5 +1,6 @@
 package com.example.dataservice.service;
 
+import com.example.dataservice.controller.DataController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class RabbitMQListenerTest {
 
     @Mock
-    private DataHandler dataHandler;
+    private DataController dataController;
 
     @InjectMocks
     private RabbitMQListener rabbitMQListener;
@@ -26,6 +27,6 @@ public class RabbitMQListenerTest {
         rabbitMQListener.MatlabListener(message, RoutingKey);
 
         //Assert
-        Mockito.verify(dataHandler).SendData(message);
+        Mockito.verify(dataController).SendData(message);
     }
 }
