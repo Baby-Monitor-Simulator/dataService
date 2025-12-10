@@ -1,12 +1,13 @@
 package com.example.dataservice.service;
 
-import com.example.dataservice.controller.DataController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.example.dataservice.component.DataController;
 
 @ExtendWith(MockitoExtension.class)
 public class RabbitMQListenerTest {

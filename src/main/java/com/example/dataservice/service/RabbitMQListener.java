@@ -1,13 +1,16 @@
 package com.example.dataservice.service;
 
+import com.example.dataservice.component.DataController;
 import com.example.dataservice.config.RabbitMQConfig;
-import com.example.dataservice.controller.DataController;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
 @Service
+@DependsOn("websocketservice") 
 @ConditionalOnExpression("!'${spring.rabbitmq.host}'.isEmpty()")
 public class RabbitMQListener {
 
