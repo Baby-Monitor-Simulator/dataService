@@ -1,4 +1,5 @@
 version: "3.8"
+name: dev-baby-monitor
 services:
   rabbitmq:
     image: rabbitmq:3.11-management
@@ -20,9 +21,10 @@ services:
 
   dataservice:
     build: .
-    container_name: spring-websocket-app
+    container_name: dataservice
     #ports:
-    #  - "REPLACE:REPLACE"
+    #  - "REPLACE:REPLACE" # server.port
+    #  - "REPLACE:REPLACE" # Websocket port
     environment:
       # Spring Boot common RabbitMQ properties:
     #  SPRING_RABBITMQ_HOST: REPLACE
