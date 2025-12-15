@@ -45,7 +45,6 @@ public class DataController {
                 }).join();
     }
 
-    // Optioneel: method om berichten te sturen
     public Object SendData(Object message) {
         if (webSocket != null) {
             webSocket.sendText(message.toString(), true);
