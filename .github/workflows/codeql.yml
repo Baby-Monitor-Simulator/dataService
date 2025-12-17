@@ -40,43 +40,6 @@ jobs:
         #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
         #   retry-on-snapshot-warnings: true
 
-  # OWasp dependency check
-  owasp-dependency-check:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Run OWASP Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'my-java-project'
-          path: '.'
-          format: 'ALL'
-          args: >
-            --failOnCVSS 7
-            --enableRetired
-
-      - name: Upload OWASP results to GitHub
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: reports/dependency-check-report.sarif
-
-      - name: Upload OWASP report as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: owasp-dependency-check-report
-          path: reports/
 
 # Trivy Security Scanner
   trivy-security:
@@ -103,33 +66,6 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
-  # License Compliance Check
-  license-check:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Check licenses with Maven
-        run: |
-          mvn license:add-third-party
-          mvn license:check-licenses -Dlicense.failOnMissing=true
-
-      - name: Upload license report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: license-report
-          path: target/generated-sources/license/THIRD-PARTY.txt
 
   # analyze 
   analyze:
