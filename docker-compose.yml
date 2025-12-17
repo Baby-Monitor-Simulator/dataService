@@ -1,15 +1,14 @@
 version: "3.8"
-name: dev-baby-monitor
 services:
   rabbitmq:
     image: rabbitmq:3.11-management
     container_name: rabbitmq
-    #ports:
-    #  - "REPLACE:REPLACE"      # AMQP port
-    #  - "REPLACE:REPLACE"    # management UI
-    #environment:
-    #  RABBITMQ_DEFAULT_USER: REPLACE
-    #  RABBITMQ_DEFAULT_PASS: REPLACE
+    ports:
+      - "5672:5672"      # AMQP port
+      - "15672:15672"    # management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
 
     networks:
       - rabbitmq
@@ -21,19 +20,19 @@ services:
 
   dataservice:
     build: .
-    container_name: dataservice
-    #ports:
-    #  - "REPLACE:REPLACE" # server.port
-    #  - "REPLACE:REPLACE" # Websocket port
+    container_name: dataService
+    ports:
+      - "8080:8080"
+      - "8722:8722"
     environment:
       # Spring Boot common RabbitMQ properties:
-    #  SPRING_RABBITMQ_HOST: REPLACE
-    #  SPRING_RABBITMQ_PORT: REPLACE
-    #  SPRING_RABBITMQ_USERNAME: REPLACE
-    #  SPRING_RABBITMQ_PASSWORD: REPLACE
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
 
       # optional: server.port override
-    #  SERVER_PORT: REPLACE
+      SERVER_PORT: 8080
 
       # optional JVM tuning
       JAVA_OPTS: "-Xms256m -Xmx512m"
