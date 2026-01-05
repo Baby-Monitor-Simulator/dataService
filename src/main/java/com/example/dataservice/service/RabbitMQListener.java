@@ -9,6 +9,8 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 @DependsOn("websocketservice") 
 @ConditionalOnExpression("!'${spring.rabbitmq.host}'.isEmpty()")
@@ -21,9 +23,9 @@ public class RabbitMQListener {
     }
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
-    public void MatlabListener(Object message, @Header("amqp_receivedRoutingKey") String routingkey){
+    public void MatlabListener(String message, @Header("amqp_receivedRoutingKey") String routingkey) throws IOException {
         //handle request
-        System.out.println(message.toString());
+        System.out.println(message);
         dataController.SendData(message);
     }
 }

@@ -7,6 +7,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.dataservice.component.DataController;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
@@ -16,9 +18,9 @@ public class ControllerTest {
     private DataController dataController;
 
     @Test
-    public void DataControllerTest(){
+    public void DataControllerTest() throws IOException {
         //Arrange
-        Object message = "Test";
+        String message = "Test";
 
         //Act
         Object result = dataController.SendData(message);

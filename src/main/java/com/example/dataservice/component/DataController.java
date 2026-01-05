@@ -1,15 +1,23 @@
 package com.example.dataservice.component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.util.concurrent.CompletionStage;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class DataController {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private WebSocket webSocket;
 
@@ -22,7 +30,7 @@ public class DataController {
                     @Override
                     public void onOpen(WebSocket webSocket) {
                         System.out.println("Connected to server");
-                        webSocket.sendText("Hello from Spring component!", true);
+                        //webSocket.sendText("Hello from Spring component!", true);
                         WebSocket.Listener.super.onOpen(webSocket);
                     }
 
@@ -45,10 +53,7 @@ public class DataController {
                 }).join();
     }
 
-    public Object SendData(Object message) {
-        if (webSocket != null) {
-            webSocket.sendText(message.toString(), true);
-        }
-        return message;
+    public CompletionStage<?> SendData(String message) throws IOException {
+        return webSocket.sendText("message", true);
     }
 }

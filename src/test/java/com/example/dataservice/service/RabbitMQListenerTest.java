@@ -9,6 +9,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.dataservice.component.DataController;
 
+import java.io.IOException;
+
 @ExtendWith(MockitoExtension.class)
 public class RabbitMQListenerTest {
 
@@ -19,7 +21,7 @@ public class RabbitMQListenerTest {
     private RabbitMQListener rabbitMQListener;
 
     @Test
-    public void MatlabListenerTest(){
+    public void MatlabListenerTest() throws IOException {
         //Arrange
         String message = "Test";
         String RoutingKey = "TestRouting";
