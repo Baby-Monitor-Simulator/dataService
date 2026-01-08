@@ -5,6 +5,7 @@ Dit project is een service die verantwoordelijk is voor het converteren van een 
 Deze feature is voor de websocket. Deze word getest met de Backend_integration_testing repository.
 **Deze branch is op het gegeven moment niet werkend**
 Dit komt doordat er een mismatch is tussen de message die de websocket wil versturen en de ontvanger wil ontvangen.
+Dit creëert een blocking write time out error in de Backend_integration_testing project.
 Gebruik Backend_integration_testing om dit te testen.
 
 ## Setup
